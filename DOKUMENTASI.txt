@@ -1,0 +1,18 @@
+----------------
+DOKUMENTASI
+----------------
+1. Melakukan Git Clone Pada Link Github Berikut :
+"https://github.com/SyahrulAndiSantoso/test_programmer.git"
+2.Mencari file "settings.py" dan buka file tersebut
+3.ubah pada bagian databases, pada kolom password, host, dan port
+sesuaikan dengan settingan database pribadi
+4.buka database admin dan buat database dengan nama "tes_programmer2"
+5.setelah itu buka terminal dan masuklah ke direktori project atau folder aplikasi
+6. jalankan perintah dibawah ini :
+"py manage.py migrate"
+perintah ini digunakan untuk melakukan pembuatan data-data database
+ke dalam database anda, setelah melakukan perintah di atas akan ada
+table
+7.jalankan perintah dibawah ini :
+"py manage.py runserver"
+aplikasi sudah bisa dijalankan dibrowser
