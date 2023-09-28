@@ -1,0 +1,28 @@
+{% extends "layout/index.html" %}
+
+{% block title %} Edit Kategori {% endblock %}
+
+{% block content %}
+{% if messages %}
+  {% for message in messages  %}
+  <br>
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    {{ message }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  {% endfor %}
+{% endif %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Edit Kategori</h1>
+  </div>
+
+  <form action="{% url 'prosesEditKategori' %}" method="POST">
+    {% csrf_token %}
+    <input type="hidden" class="form-control" name="id_kategori" id="id_kategori" value="{{ kategori.id_kategori }}">
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Nama Kategori</label>
+      <input type="text" class="form-control" name="nama_kategori" id="nama_kategori"value="{{ kategori.nama_kategori }}">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+{% endblock %}

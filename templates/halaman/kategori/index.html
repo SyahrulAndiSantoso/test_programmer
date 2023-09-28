@@ -1,0 +1,43 @@
+{% extends "layout/index.html" %}
+
+{% block title %}Kategori{% endblock %}
+
+{% block content %}
+{% if messages %}
+  {% for message in messages  %}
+  <br>
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    {{ message }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  {% endfor %}
+{% endif %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Kategori</h1>
+    <a href="{% url 'tambahKategori' %}" class="btn btn-success">+ Tambah Data</a>
+  </div>
+
+  <div class="table-responsive">
+    <table id="table" class="table table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Name</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for data_kategori in kategori %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ data_kategori.nama_kategori }}</td>
+                <td>
+                    <a class="btn btn-warning" href="{% url 'editKategori' data_kategori.id_kategori %}">Edit</a>
+                    <a class="btn btn-danger" onclick="return confirm('Apakah anda yakin ingin menghapus data ini ?')" href="{% url 'hapusKategori' data_kategori.id_kategori %}">Hapus</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+  </div>
+{% endblock %}

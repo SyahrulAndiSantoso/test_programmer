@@ -1,0 +1,48 @@
+{% extends "layout/index.html" %}
+{% block title %}Produk{% endblock %}
+
+{% block content %}
+{% if messages %}
+  {% for message in messages  %}
+  <br>
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+    {{ message }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  {% endfor %}
+{% endif %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Produk</h1>
+    <a href="{% url 'tambahProduk' %}" class="btn btn-success">+ Tambah Data</a>
+  </div>
+
+  <div class="table-responsive">
+    <table id="table" class="table table-striped" style="width:100%">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Nama Produk</th>
+                <th>Harga</th>
+                <th>Kategori</th>
+                <th>Status</th>
+                <th>Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for data_produk in produk %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ data_produk.nama_produk }}</td>
+                <td>{{ data_produk.harga }}</td>
+                <td>{{ data_produk.kategori_id.nama_kategori }}</td>
+                <td><span class="badge text-bg-success">{{ data_produk.status_id.nama_status }}</span></td>
+                <td>
+                    <a class="btn btn-warning" href="{% url 'editProduk' data_produk.id_produk %}">Edit</a>
+                    <a class="btn btn-danger" onclick="return confirm('Apakah anda yakin ingin menghapus data ini ?')" href="{% url 'hapusProduk' data_produk.id_produk %}">Hapus</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+  </div>
+{% endblock %}

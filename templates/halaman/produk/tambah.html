@@ -1,0 +1,48 @@
+{% extends "layout/index.html" %}
+{% block title %}Tambah Produk{% endblock %}
+
+{% block content %}
+{% if messages %}
+  {% for message in messages  %}
+  <br>
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    {{ message }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  {% endfor %}
+{% endif %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Tambah Produk</h1>
+  </div>
+
+  <form action="{% url 'prosesTambahProduk' %}" method="POST">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Nama Produk</label>
+      <input type="text" class="form-control" name="nama_produk">
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">Harga</label>
+      <input type="number" class="form-control" name="harga">
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">Kategori</label>
+      <select name="kategori_id" class="form-select">
+        <option selected>Pilih Kategori</option>
+        {% for data_kategori in kategori %}
+        <option value="{{ data_kategori.id_kategori }}">{{ data_kategori.nama_kategori }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">Status</label>
+      <select name="status_id" class="form-select">
+        <option selected>Pilih Status</option>
+        {% for data_status in status %}
+        <option value="{{ data_status.id_status }}">{{ data_status.nama_status }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+{% endblock %}

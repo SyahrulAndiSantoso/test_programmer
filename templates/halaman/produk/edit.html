@@ -1,0 +1,57 @@
+{% extends "layout/index.html" %}
+{% block title %}Edit Produk{% endblock %}
+
+{% block content %}
+{% if messages %}
+  {% for message in messages  %}
+  <br>
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    {{ message }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  {% endfor %}
+{% endif %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <h1 class="h2">Edit Produk</h1>
+  </div>
+
+  <form action="{% url 'prosesEditProduk' %}" method="POST">
+    {% csrf_token %}
+    <input type="hidden" class="form-control" name="id_produk" value="{{ produk.id_produk }}">
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Nama Produk</label>
+      <input type="text" class="form-control" name="nama_produk" value="{{ produk.nama_produk }}">
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">Harga</label>
+      <input type="number" class="form-control" name="harga" value="{{ produk.harga }}">
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">Kategori</label>
+      <select name="kategori_id" class="form-select">
+        <option selected>Pilih Kategori</option>
+        {% for data_kategori in kategori %}
+        {% if data_kategori.id_kategori == produk.kategori_id.id_kategori %}
+        <option value="{{ data_kategori.id_kategori }}" selected>{{ data_kategori.nama_kategori }}</option>
+        {% else %}
+        <option value="{{ data_kategori.id_kategori }}">{{ data_kategori.nama_kategori }}</option>
+        {% endif %}
+        {% endfor %}
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">Status</label>
+      <select name="status_id" class="form-select">
+        <option selected>Pilih Status</option>
+        {% for data_status in status %}
+        {% if data_status.id_status == produk.status_id.id_status %}
+        <option value="{{ data_status.id_status }}" selected>{{ data_status.nama_status }}</option>
+        {% else %}
+        <option value="{{ data_status.id_status }}">{{ data_status.nama_status }}</option>
+        {% endif %}
+        {% endfor %}
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+{% endblock %}
